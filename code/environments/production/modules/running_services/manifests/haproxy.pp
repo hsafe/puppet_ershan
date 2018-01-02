@@ -1,0 +1,3 @@
+service {'haproxy':
+  ensure => 'running',
+}

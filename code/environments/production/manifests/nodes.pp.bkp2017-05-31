@@ -1,0 +1,180 @@
+node 'devop-testbed' {
+        notify {'devop-testbed node':
+        }
+        include packages
+        include motd
+#        include localusers
+        include localrepo
+        include [ 'accounts::hsafe' ]
+        class { '::chrony':
+          servers =>  ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+        class {'::mysql::server':
+          root_password           => 'root@123',
+#          remove_default_accounts =>  true,
+#         override_options =>  $override_options
+        }
+#          mysql::db { 'mydb':
+#            user     => 'mydbuser',
+#            password => 'mydbuser@123',
+#            host     => 'localhost',
+#            grant    =>  'ALL',
+#           }
+        class {'::nginx':}
+          
+}
+node 'app-jasperha.ershandc.org' , /^ndb\-haproxy[\d]*.[\w]*.org$/ , /^app\-lb[\d]*.[\w]*.org$/ {
+  notify { 'HA proxyies across all zones' : }
+#  class { '::running_services::haproxy' : }
+  service { 'haproxy' :
+    ensure => running,
+  }
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+}
+node /^app\-graylog[\d]*.[\w]*.org$/ , /^db\-graylog[\d].[\w]*.org$/ {
+  notify { 'NDB & APP Graylog clusters' : } 
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^app\-ershanapp[\d]*.[\w]*.org$/ {
+  notify { 'ershan app cluster' : }
+  service { 'nginx' :
+    ensure => running,
+  }
+  service { 'php-fpm' :
+    ensure =>  running,
+  }
+  service { 'supervisord' :
+    ensure =>  running,
+  }
+  service { 'rsyncd' :
+    ensure =>  running,
+  }
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^app\-nodejs[\d]*.[\w]*.org$/ {
+  notify { 'ershan NodeJS cluster' : }
+  service { 'redis' :
+    ensure =>   running,
+  }
+  service { 'rsyncd' :
+    ensure =>   running,
+  }
+  service { 'memcached' :
+    ensure =>   running,
+  }
+
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^app\-memcached[\d]*.[\w]*.org$/ {
+  notify { 'ershan memcached cluster' : }
+  service { 'memcached' :
+    ensure => running,
+  }
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^ndb\-data[\d]*.[\w]*.[\w]*.org$/ {
+  notify { 'ershan ndb data cluster' : } 
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^ndb\-sql[\d]*.[\w]*.[\w]*.org$/ {
+  notify { 'ershan ndb data cluster' : } 
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^app\-glusterfs[\d]*.[\w]*.org$/ , /^ershanapp\-gluster[\d]*.[\w]*.org$/ {
+  notify { 'ershan gluster cluster' : } 
+  include motd
+  include snmp
+  include [ 'accounts::hsafe' ]
+  class {'::localpuppetfile':}
+  class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+}
+
+node /^app\-jasperreport[\d]*.[\w]*.org$/ {
+  notify {'jasperport cluster member' : }
+  include motd
+  include [ 'accounts::hsafe' ]
+  include packages
+  class { '::chrony':
+          servers =>    ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+  }
+  include localrepo
+  include snmp
+  class {'::localpuppetfile':}
+  service {'jasperreport':
+    ensure => 'running',
+  }
+}
+node default    {
+        notify {'Default Node':
+        }
+        include motd
+        include [ 'accounts::hsafe' ]
+        include packages
+        class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+        include localrepo
+        include snmp
+#        file {'/etc/puppetlabs/puppet/puppet.conf':
+#          ensure => file,
+#          source => 'puppet:///etc/puppetlabs/puppet/puppet.conf',
+#        }
+
+      class {'::localpuppetfile':}
+}
+        
+#        firewall { '000 allow all snmp':
+#          dport           => '161',
+#          proto           => ['tcp', 'udp' ],
+#          action          => 'accept',
+#        }
+
+
+

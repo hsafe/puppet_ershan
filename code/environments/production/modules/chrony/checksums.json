@@ -1,0 +1,21 @@
+{
+  "Gemfile": "d10bd8c989e4e86e9f4e82241f6fc9da",
+  "LICENSE": "4ebc4a74012996887ac4992c4fc274f4",
+  "Modulefile": "eff7a022dd02a639c3fedb92273ae356",
+  "README.md": "b6d36a85c4ec36fb43c866617ff47d93",
+  "Rakefile": "3ba82ac7e94662e5408d284323be4043",
+  "manifests/config.pp": "aab47522e27959af810cf3be14e0b59f",
+  "manifests/init.pp": "f17dc20e9a42bd7b590d34783cc3e8c0",
+  "manifests/install.pp": "fe451058e312e18d22883cce410e0b90",
+  "manifests/params.pp": "4fe3e2afb4e92ca5e893d4c553f26ea6",
+  "manifests/service.pp": "55e4a02e2d9272e541d981d34fe48190",
+  "metadata.json": "109ce171e48c6ebe8112849659bd8486",
+  "spec/classes/init_spec.rb": "eb4154ba6bfd5ffc367dda3e433bf572",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "7c8305ebbcd8468eead92fc3db2b769a",
+  "templates/chrony.conf.archlinux.erb": "958300298e90ff7ccbe7147c483622f2",
+  "templates/chrony.conf.redhat.erb": "52461dc5700f2c470936b476b0c5da7b",
+  "templates/chrony.keys.archlinux.erb": "a2e00dab68d70f09950022a2643dc774",
+  "templates/chrony.keys.redhat.erb": "a2e00dab68d70f09950022a2643dc774",
+  "tests/init.pp": "06db84c937e25dfe0e284365ea10d0c1"
+}

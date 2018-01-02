@@ -1,0 +1,8 @@
+[local_repo]
+name=local.repo
+baseurl=ftp://172.17.1.230/pub/packages
+#baseurl=http://127.0.0.1/packages
+enable=1
+gpgcheck=0
+#priority=1
+

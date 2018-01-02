@@ -1,0 +1,324 @@
+2018-01-02 12:15:03.376506 WARN  puppetlabs.facter - skipping external facts for "/opt/puppetlabs/puppet/cache/facts.d": No such file or directory
+aio_agent_version: 1.10.9
+augeas:
+  version: 1.4.0
+disks:
+  fd0:
+    size: 4.00 KiB
+    size_bytes: 4096
+  sda:
+    model: Virtual disk
+    size: 16.00 GiB
+    size_bytes: 17179869184
+    vendor: VMware
+  sdb:
+    model: Virtual disk
+    size: 14.00 GiB
+    size_bytes: 15032385536
+    vendor: VMware
+  sr0:
+    model: VMware IDE CDR10
+    size: 1.00 GiB
+    size_bytes: 1073741312
+    vendor: NECVMWar
+dmi:
+  bios:
+    release_date: 07/30/2013
+    vendor: Phoenix Technologies LTD
+    version: "6.00"
+  board:
+    manufacturer: Intel Corporation
+    product: 440BX Desktop Reference Platform
+    serial_number: None
+  chassis:
+    asset_tag: No Asset Tag
+    type: Other
+  manufacturer: VMware, Inc.
+  product:
+    name: VMware Virtual Platform
+    serial_number: VMware-42 3c 23 0f 9b fc 89 dc-98 71 43 e0 45 ed 3f 83
+    uuid: 423C230F-9BFC-89DC-9871-43E045ED3F83
+facterversion: 3.6.8
+filesystems: xfs
+identity:
+  gid: 0
+  group: root
+  privileged: true
+  uid: 0
+  user: root
+is_virtual: true
+kernel: Linux
+kernelmajversion: "3.10"
+kernelrelease: 3.10.0-693.5.2.el7.x86_64
+kernelversion: 3.10.0
+load_averages:
+  15m: 0.23
+  1m: 0.4
+  5m: 0.24
+memory:
+  swap:
+    available: 1.53 GiB
+    available_bytes: 1639673856
+    capacity: 4.65%
+    total: 1.60 GiB
+    total_bytes: 1719660544
+    used: 76.28 MiB
+    used_bytes: 79986688
+  system:
+    available: 1.84 GiB
+    available_bytes: 1977303040
+    capacity: 67.53%
+    total: 5.67 GiB
+    total_bytes: 6089170944
+    used: 3.83 GiB
+    used_bytes: 4111867904
+mountpoints:
+  /:
+    available: 3.89 GiB
+    available_bytes: 4180541440
+    capacity: 71.90%
+    device: /dev/mapper/centos-root
+    filesystem: xfs
+    options:
+      - rw
+      - seclabel
+      - relatime
+      - attr2
+      - inode64
+      - noquota
+    size: 13.86 GiB
+    size_bytes: 14879293440
+    used: 9.96 GiB
+    used_bytes: 10698752000
+  /boot:
+    available: 169.05 MiB
+    available_bytes: 177262592
+    capacity: 65.96%
+    device: /dev/sda1
+    filesystem: xfs
+    options:
+      - rw
+      - seclabel
+      - relatime
+      - attr2
+      - inode64
+      - noquota
+    size: 496.67 MiB
+    size_bytes: 520794112
+    used: 327.62 MiB
+    used_bytes: 343531520
+  /dev/shm:
+    available: 2.84 GiB
+    available_bytes: 3044585472
+    capacity: 0%
+    device: tmpfs
+    filesystem: tmpfs
+    options:
+      - rw
+      - seclabel
+      - nosuid
+      - nodev
+    size: 2.84 GiB
+    size_bytes: 3044585472
+    used: 0 bytes
+    used_bytes: 0
+  /opt:
+    available: 7.28 GiB
+    available_bytes: 7816179712
+    capacity: 47.96%
+    device: /dev/sdb1
+    filesystem: xfs
+    options:
+      - rw
+      - seclabel
+      - relatime
+      - attr2
+      - inode64
+      - noquota
+    size: 13.99 GiB
+    size_bytes: 15020851200
+    used: 6.71 GiB
+    used_bytes: 7204671488
+  /run:
+    available: 2.53 GiB
+    available_bytes: 2716815360
+    capacity: 10.77%
+    device: tmpfs
+    filesystem: tmpfs
+    options:
+      - rw
+      - seclabel
+      - nosuid
+      - nodev
+      - mode=755
+    size: 2.84 GiB
+    size_bytes: 3044585472
+    used: 312.59 MiB
+    used_bytes: 327770112
+  /run/user/0:
+    available: 580.71 MiB
+    available_bytes: 608919552
+    capacity: 0%
+    device: tmpfs
+    filesystem: tmpfs
+    options:
+      - rw
+      - seclabel
+      - nosuid
+      - nodev
+      - relatime
+      - size=594648k
+      - mode=700
+    size: 580.71 MiB
+    size_bytes: 608919552
+    used: 0 bytes
+    used_bytes: 0
+  /sys/fs/cgroup:
+    available: 2.84 GiB
+    available_bytes: 3044585472
+    capacity: 0%
+    device: tmpfs
+    filesystem: tmpfs
+    options:
+      - ro
+      - seclabel
+      - nosuid
+      - nodev
+      - noexec
+      - mode=755
+    size: 2.84 GiB
+    size_bytes: 3044585472
+    used: 0 bytes
+    used_bytes: 0
+networking:
+  dhcp: 192.168.10.1
+  domain: ershandc.org
+  fqdn: puppet.ershandc.org
+  hostname: puppet
+  interfaces:
+    ens160:
+      mac: "00:50:56:bc:03:47"
+      mtu: 1500
+    ens192:
+      bindings:
+        - address: 192.168.10.99
+          netmask: 255.255.255.0
+          network: 192.168.10.0
+      bindings6:
+        - address: "fe80::8b3a:7d6c:329b:ea11"
+          netmask: "ffff:ffff:ffff:ffff::"
+          network: "fe80::"
+      dhcp: 192.168.10.1
+      ip: 192.168.10.99
+      ip6: "fe80::8b3a:7d6c:329b:ea11"
+      mac: "00:50:56:bc:27:3a"
+      mtu: 1500
+      netmask: 255.255.255.0
+      netmask6: "ffff:ffff:ffff:ffff::"
+      network: 192.168.10.0
+      network6: "fe80::"
+    lo:
+      bindings:
+        - address: 127.0.0.1
+          netmask: 255.0.0.0
+          network: 127.0.0.0
+      bindings6:
+        - address: "::1"
+          netmask: "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+          network: "::1"
+      ip: 127.0.0.1
+      ip6: "::1"
+      mtu: 65536
+      netmask: 255.0.0.0
+      netmask6: "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+      network: 127.0.0.0
+      network6: "::1"
+  ip: 192.168.10.99
+  ip6: "fe80::8b3a:7d6c:329b:ea11"
+  mac: "00:50:56:bc:27:3a"
+  mtu: 1500
+  netmask: 255.255.255.0
+  netmask6: "ffff:ffff:ffff:ffff::"
+  network: 192.168.10.0
+  network6: "fe80::"
+  primary: ens192
+os:
+  architecture: x86_64
+  family: RedHat
+  hardware: x86_64
+  name: CentOS
+  release:
+    full: 7.4.1708
+    major: "7"
+    minor: "4"
+  selinux:
+    config_mode: enforcing
+    current_mode: enforcing
+    enabled: true
+    enforced: true
+    policy_version: "28"
+partitions:
+  /dev/mapper/centos-root:
+    filesystem: xfs
+    mount: /
+    size: 13.87 GiB
+    size_bytes: 14889779200
+    uuid: fe17c282-3b2b-41d4-8060-7b9900438139
+  /dev/mapper/centos-swap:
+    filesystem: swap
+    size: 1.60 GiB
+    size_bytes: 1719664640
+    uuid: ca94874e-d6c8-434f-9200-146387fd4aac
+  /dev/sda1:
+    filesystem: xfs
+    mount: /boot
+    size: 500.00 MiB
+    size_bytes: 524288000
+    uuid: 2e806736-fa04-479b-8198-d68168e85841
+  /dev/sda2:
+    filesystem: LVM2_member
+    size: 15.51 GiB
+    size_bytes: 16654532608
+    uuid: UtxffK-H1LC-oQTE-IJwd-TSDG-Z4da-GzfHrf
+  /dev/sdb1:
+    filesystem: xfs
+    mount: /opt
+    size: 14.00 GiB
+    size_bytes: 15031336960
+    uuid: d9eddf07-148e-4b44-9ae8-836df5e40226
+path: "/opt/puppet/bin:/opt/puppetlabs/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+processors:
+  count: 2
+  isa: x86_64
+  models:
+    - Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz
+    - Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz
+  physicalcount: 2
+puppetversion: 4.10.9
+ruby:
+  platform: x86_64-linux
+  sitedir: /opt/puppetlabs/puppet/lib/ruby/site_ruby/2.1.0
+  version: 2.1.9
+ssh:
+  ecdsa:
+    fingerprints:
+      sha1: SSHFP 3 1 b392e4ac7578bff4d677d66e386466d14897794e
+      sha256: SSHFP 3 2 5a2e6610ef9d64c267b5ee7286645569f7860db108af38c404423bb72b64771f
+    key: AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEEZ7XQ2ZJjsRWEuOIrqr876anwbK15SHVfT5S+qxMex81weve8C2xPMDBEylBUigt5qMyZz4vH7A59k4KPZ00E=
+  ed25519:
+    fingerprints:
+      sha1: SSHFP 4 1 e43961b00b9d71ae9cb50e49149920fbea11c8e4
+      sha256: SSHFP 4 2 b00a9800cf5fcdc153eaf8eb5b30ea8e2c71bd347ad711f61790704115777e75
+    key: AAAAC3NzaC1lZDI1NTE5AAAAIKiTL2m1DKlx71T32lm6DCrc214Qi4D9iZGV+RjSfa6C
+  rsa:
+    fingerprints:
+      sha1: SSHFP 1 1 3de35ea654062435a25c3bb1dc58a243746271b2
+      sha256: SSHFP 1 2 8503589e266083b03921608b836c1142081baa4702671dba27fa349a5d2e4714
+    key: AAAAB3NzaC1yc2EAAAADAQABAAABAQCaNaaJDB68HM8cANguR+nrFx1IXL5goqZXbkQq+XhlRM8cJEAWeVkCOuEgwhKKgxW9ndaeaZfaLWODY3blsnlT+OqTcj7083iVzWxfmuVJTNlGW+wDWmE6zO4Gnj8w0aEcPmWtrRTC9fqfiYhjdl65iQsL9U8E8X8r2SrLcvea7FJN9f0XBg/Ht9bntVRkd6La+ubC4M2vNjZeghvpXvxmUhEzd0ih6uRF7rpzvv7t1MaN0cms+njgrwobtSfb83A4dw25XhPmikc4z3iMpsUNvqS7+vEmeTPLFMoYCg8vrk+X4Coa9w8temo+WwZgDLP0ULVfylG9bvWlXxkc0Gpf
+system_uptime:
+  days: 36
+  hours: 864
+  seconds: 3111184
+  uptime: 36 days
+timezone: "+0330"
+virtual: vmware

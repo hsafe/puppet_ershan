@@ -1,0 +1,15 @@
+{
+  "name": "ershan-snmp",
+  "version": "0.1.0",
+  "author": "ershan",
+  "summary": "SNMP customized env needed to be run on CentOS7 clients",
+  "license": "Apache-2.0",
+  "source": "local",
+  "project_page": "nowhere",
+  "issues_url": "nowhere",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

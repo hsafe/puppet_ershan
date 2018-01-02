@@ -1,0 +1,15 @@
+{
+  "name": "hsafe-elkstack",
+  "version": "0.1.0",
+  "author": "hsafe",
+  "summary": "elkstack installation and service handeling from the filebeat client side",
+  "license": "Apache-2.0",
+  "source": "",
+  "project_page": "github/hsafe",
+  "issues_url": "github/hsafe",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

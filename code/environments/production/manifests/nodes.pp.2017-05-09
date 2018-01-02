@@ -1,0 +1,32 @@
+node 'devop-testbed' {
+        notify {'devop-testbed node':
+        }
+        include packages
+        include motd
+#        include localusers
+        include localrepo
+        include [ 'accounts::hsafe' ]
+        class { '::chrony':
+          servers =>  ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+
+}
+node default    {
+        notify {'Default Node':
+        }
+        include motd
+        include [ 'accounts::hsafe' ]
+        include packages
+        class { '::chrony':
+          servers =>   ['172.16.1.1 prefer', '0.centos.pool.ntp.org', '1.centos.pool.ntp.org', '2.centos.pool.ntp.org', '3.centos.pool.ntp.org' ],
+        }
+        include localrepo
+        include snmp
+        include [ 'firewall::snmp' ]
+        file {'/etc/puppetlabs/puppet/puppet.conf':
+          ensure => file,
+          source => 'puppet:////etc/puppetlabs/puppet/puppet.conf',
+        }
+}
+
+
