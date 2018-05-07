@@ -9,5 +9,4 @@ class packages {
     package { 'net-tools': }
     package { 'epel-release': }
     package { 'open-vm-tools': }
-    package { 'nfs-utils': }
 }

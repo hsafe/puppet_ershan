@@ -8,6 +8,7 @@ node 'devop-testbed' {
           } 
         include localrepo
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class { '::chrony':
           servers =>  ['172.17.1.1 prefer', '##0.centos.pool.ntp.org', '##1.centos.pool.ntp.org', '##2.centos.pool.ntp.org', '##3.centos.pool.ntp.org' ],
           }
@@ -42,7 +43,16 @@ node 'devop-testbed' {
           line     => 'START_HOURS_RANGE=1-5',
           replace  => 'true',
           }
-
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>  $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>  '/bkp/exports',
+       }  
 
 
  
@@ -56,6 +66,7 @@ node 'app-jasperha.ershandc.org' , /^ndb\-haproxy[\d]*.[\w]*.org$/ , /^app\-lb[\
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::clamav' :
           manage_user      => true,
@@ -82,6 +93,16 @@ node 'app-jasperha.ershandc.org' , /^ndb\-haproxy[\d]*.[\w]*.org$/ , /^app\-lb[\
           line     => 'START_HOURS_RANGE=1-5',
           replace  =>  'true',
           }
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
 
 }
 node /^app\-graylog[\d]*.[\w]*.org$/ {
@@ -90,6 +111,7 @@ node /^app\-graylog[\d]*.[\w]*.org$/ {
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -114,13 +136,33 @@ node /^app\-graylog[\d]*.[\w]*.org$/ {
           days_of_week     =>  '45',
           }
         file_line {'cron_daily':
-          ensure   => 'present',
-          path     => '/etc/anacrontab',
-          match    => '^START_HOURS_RANGE*',
-          multiple => 'true',
-          line     => 'START_HOURS_RANGE=1-5',
-          replace  =>  'true',
+          ensure              => 'present',
+          path                => '/etc/anacrontab',
+          match               => '^START_HOURS_RANGE*',
+          multiple            => 'true',
+          line                => 'START_HOURS_RANGE=1-5',
+          replace             => 'true',
           }
+         class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
 
 
 }
@@ -131,6 +173,7 @@ node  /^db\-graylog[\d].[\w]*.org$/ {
          include snmp
          include packages
          include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
          class {'::localpuppetfile':}
          class { '::chrony':
            servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -161,6 +204,16 @@ node  /^db\-graylog[\d].[\w]*.org$/ {
           line     => 'START_HOURS_RANGE=1-5',
           replace  =>  'true',
           }
+         class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
 
 }
 
@@ -182,6 +235,7 @@ node /^app\-ershanapp[\d]*.[\w]*.org$/ {
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -212,6 +266,16 @@ node /^app\-ershanapp[\d]*.[\w]*.org$/ {
           line     => 'START_HOURS_RANGE=1-5',
           replace  =>  'true',
           }
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>    $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>    '/bkp/exports',
+       }
 
 }
 
@@ -230,6 +294,7 @@ node /^app\-nodejs[\d]*.[\w]*.org$/ {
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -271,6 +336,7 @@ node /^app\-memcached[\d]*.[\w]*.org$/ {
         include motd
         include snmp
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -312,6 +378,7 @@ node /^app\-activemq[\d]*.[\w]*.org$/ {
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>    ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -350,6 +417,7 @@ node /^ndb\-data[\d]*.[\w]*.[\w]*.org$/ {
         include motd
         include snmp
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.16.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -383,12 +451,14 @@ node /^ndb\-data[\d]*.[\w]*.[\w]*.org$/ {
 
 }
 
-node /^ndb\-sql[\d]*.[\w]*.[\w]*.org$/ {
+#node /^ndb\-sql[\d]*.[\w]*.[\w]*.org$/,"DB-MASTER.ershadc.org" {
+node /^db\-[\w]*.[\w]*.org$/ {
         notify { 'ershan ndb data cluster' : } 
         include motd
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.16.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -428,6 +498,7 @@ node /^app\-glusterfs[\d]*.[\w]*.org$/ , /^ershanapp\-gluster[\d]*.[\w]*.org$/ {
         include snmp
         include packages
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         class {'::localpuppetfile':}
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -465,6 +536,7 @@ node /^app\-jasperreport[\d]*.[\w]*.org$/ {
         notify {'jasperport cluster member' : }
         include motd
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         include packages
         class { '::chrony':
           servers =>    ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -507,6 +579,7 @@ node /^app\-zookeeper[\d]*.[\w]*.org$/ {
         notify {'zookeeper cluster member' : }
         include motd
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         include packages
         class { '::chrony':
           servers =>     ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -550,6 +623,7 @@ node elk.ershandc.org {
         notify {'elk stack node' : }
         include motd
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         include packages
         class { '::chrony':
           servers =>    ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
@@ -594,7 +668,71 @@ node elk.ershandc.org {
           line     => 'START_HOURS_RANGE=1-5',
           replace  =>  'true',
           }
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
 
+}
+
+node /^dev\-nfs[\d]*.[\w]*.org$/ {
+
+        notify {'NFS servers cluster':
+        }
+        include motd
+        include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
+        include packages
+        class { '::chrony':
+          servers =>    ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
+        }
+        include localrepo
+        include snmp
+        class {'::localpuppetfile':}
+        class { '::clamav' :
+          manage_user      => true,
+          uid              => 499,
+          gid              => 499,
+          shell            => '/sbin/nologin',
+          manage_clamd     => true,
+          manage_freshclam =>      true,
+          }
+        class {'::mcollective' :
+          middleware_hosts => [ 'puppet' ],
+          client           =>     true,
+          }
+        class { '::localfiles::yum' :   }
+        class { '::yum_cron':
+          download_updates => true,
+          apply_updates    => false,
+          days_of_week     =>  '45',
+
+          }
+        file_line {'cron_daily':
+          ensure   => 'present',
+          path     => '/etc/anacrontab',
+          match    => '^START_HOURS_RANGE*',
+          multiple => 'true',
+          line     => 'START_HOURS_RANGE=1-5',
+          replace  =>   'true',
+          }
+        class { '::nfs' :
+          server_enabled      => true,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>  $::domain,
+        }
+        nfs::server::export{ '/bkp/exports':
+          ensure  => 'mounted',
+          clients =>  '192.168.10.0/24(rw,insecure,async,no_root_squash) localhost(rw) 172.17.1.0/24(rw,insecure,async,no_root_squash)'
+        }
+      
 }
 
 node puppet {
@@ -610,13 +748,23 @@ node puppet {
           days_of_week     =>  '45',
           }
         file_line {'cron_daily':
-          ensure   => 'present',
-          path     => '/etc/anacrontab',
-          match    => '^START_HOURS_RANGE*',
-          multiple => 'true',
-          line     => 'START_HOURS_RANGE=1-5',
-          replace  =>  'true',
+          ensure              => 'present',
+          path                => '/etc/anacrontab',
+          match               => '^START_HOURS_RANGE*',
+          multiple            => 'true',
+          line                => 'START_HOURS_RANGE=1-5',
+          replace             => 'true',
           }
+        class { '::nfs':
+          server_enabled      => false,
+          client_enabled      => true,
+          nfs_v4_client       => true,
+          nfs_v4_idmap_domain =>   $::domain,
+        }
+        nfs::client::mount { '/shares/data':
+          server => '192.168.10.86',
+          share  =>   '/bkp/exports',
+       }
 
 }
 
@@ -625,6 +773,7 @@ node default    {
         }
         include motd
         include [ 'accounts::hsafe' ]
+        include [ 'accounts::puppet' ]
         include packages
         class { '::chrony':
           servers =>   ['172.17.1.1 prefer', '#0.centos.pool.ntp.org', '#1.centos.pool.ntp.org', '#2.centos.pool.ntp.org', '#3.centos.pool.ntp.org' ],
